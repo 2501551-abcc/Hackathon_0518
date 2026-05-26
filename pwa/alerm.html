@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通知テスト</title>
+    <style>
+        /* ハッカソン用に見栄えを少し整えるCSS */
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f0f2f5; }
+        .btn { padding: 15px 30px; font-size: 18px; font-weight: bold; background-color: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .btn:active { background-color: #0056b3; }
+    </style>
+    <link rel="manifest" href="manifest.json">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="ハッカソン">
+<link rel="apple-touch-icon" href="icon.png">
+
+<script>
+  // 2. sw.js（サービスワーカー）をスマホに登録するJavaScript
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('PWAの準備ができました！', reg))
+      .catch(err => console.log('エラー:', err));
+  }
+</script>
+</head>
+<body>
+
+    <button class="btn" onclick="pushNotification()">通知をテストする</button>
+
+    <script>
+        function pushNotification() {
+            // 1. ブラウザが通知機能に対応しているかチェック
+            if (!("Notification" in window)) {
+                alert("このブラウザは通知に対応していません");
+                return;
+            }
+
+            // 2. ユーザーの許可状態を確認、または新しく許可を求める
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    // 3. 許可されていれば、通知を表示する
+                    new Notification("アプリからのメッセージ", {
+                        body: "ボタンが押されました！通知機能の導入に成功です！",
+                        icon: "https://via.placeholder.com/128" // 通知に表示するアイコンの画像URL
+                    });
+                } else if (permission === "denied") {
+                    alert("通知がブロックされています。ブラウザの設定から許可してください。");
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
