@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <title>おせっかいアプリ</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class ="container">
+            <!-- 必須設定項目 -->
+             <form>
+                <div class="required_setting">
+                    <label for="appointment-time">朝ご飯：</label>
+                    <input type="time" id="breakfast" name="required_content">
+                </div>
+
+                <div class="required_setting">
+                    <label for="appointment-time">夜ご飯：</label>
+                    <input type="time" id="dinner" name="required_content">
+                </div>
+
+                <div class="required_setting">
+                    <label for="appointment-time">お風呂：</label>
+                    <input type="time" id="bath" name="required_content">
+                </div>
+
+
+                <!-- 任意の天気や忘れ物のトグルボタン-->
+                <div class="any_setting">
+                    天気：
+                    <input id="weather" class="toggle_input" type='checkbox' />
+                    <label for="toggle" class="toggle_label" />
+                </div>
+                <div class="any_setting">
+                    忘れ物：
+                    <input id="forget" class="toggle_input" type='checkbox' />
+                    <label for="toggle" class="toggle_label" />
+                </div>
+
+            </form>
+            <div class="menu">
+                <a href="home.html"><img src="images/icons8-ホーム-50.png"></a>
+                <a href="task.html"><img src="images/icons8-タスク-50.png"></a>
+                <a href="menu.html"><img src="images/icons8-設定-50.png"></a>
+            </div>
+        </div>
+    </body>
+</html>
