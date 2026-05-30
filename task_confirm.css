@@ -1,0 +1,120 @@
+.task_confirm_back{
+    position: relative; 
+}
+
+/*背景画像の設定項目です。
+    ここは背景の上に透過した黒っぽい色、その上に以下のアイコンやボタンが配置されればなんでもいいです。
+    今回はCSSで画像のパスを設定しています。*/
+
+#back_image{
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: -5; 
+    text-align: center;
+}
+
+#back_image {
+    /* 🌟 画面いっぱいに広げる設定 */
+    width: 100vw;
+    height: 100vh;
+    background-image: url('images/部屋.jpg'); 
+    background-size: cover;      
+    background-position: center;
+    
+    /* 🌟 ここで青黒い色を重ねてブレンドします */
+    background-blend-mode: overlay; 
+    background-color: rgba(10, 20, 40, 0.75); /* 深い紺色のシースルー */
+}
+
+#back_image #back_image_color{
+    z-index: -3;
+    background-color: black;
+}
+
+/*以下はアイコンや画面遷移のためのボタンなどです*/
+
+.task_confirm_icon{
+    z-index: 2;
+    text-align: center;
+    position: fixed;          
+    left: 0;                  
+    right: 0;                 
+    width: 100vw;             
+    bottom: 0;   
+    top: 10%;
+}
+
+.task_confirm_icon #character-icon{
+    width: 60%;
+}
+
+.now_task_div{
+    z-index: 2;
+    text-align: center;
+    position: fixed;          
+    left: 0;                  
+    right: 0;                 
+    width: 100vw;             
+    bottom: 0;   
+    top: 48%;
+}
+
+.now_task_div h3{
+    font-size: 30px;  
+    color: white;
+}
+
+
+#task_confirm_container{
+    display: flex;
+    justify-content: center; 
+    text-align: center;
+    gap: 15%;   
+
+    position: fixed;          
+    left: 0;                  
+    right: 0;                 
+    width: 100vw;             
+    bottom: 10%;           
+    
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.task_confirm_div {
+    padding: 0;
+    border-radius: 50%;  
+    
+    width: 100px;      
+    height: 100px;         
+    
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ng_div {
+    background-color: crimson;
+}
+
+#ok_div {
+    background-color: #28a745; 
+}
+
+
+.task_confirm_div img {
+    width: 40%; 
+    height: auto; 
+}
+
+.task_button_div {
+    display: flex;
+    flex-direction: column;  
+    align-items: center;     
+    font-size: 20px;       
+    gap: 8px;
+    font-weight: bold;
+    color: white; 
+}
+
