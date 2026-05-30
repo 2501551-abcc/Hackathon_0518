@@ -1,4 +1,7 @@
 /* 全体 */
+html, body{
+  overflow: hidden;
+}
 body {
   margin: 0;
   background: #FFF;
@@ -9,7 +12,7 @@ body {
 /* ゲーム画面（スマホサイズ） */
 .container {
   width: 390px; /* iPhoneサイズ */
-  height: 844px;
+  height: 100vh;
   position: relative;
   overflow: hidden;
   background-image: url("images/部屋.jpg"); /* 背景 */
@@ -75,17 +78,17 @@ body {
 /* キャラ */
 #character {
   position: absolute;
-  bottom: -130px;
+  bottom: -20vh;
   left: 50%;
   transform: translateX(-50%);
-  height: 840px;
+  height: 110vh;
   z-index: 2;
 }
 
 /* メッセージボックス */
 #message_box {
   position: absolute;
-  bottom: 120px;
+  bottom: 170px; 
   width: 80%;
   height: 120px;
   left: 50%;
@@ -136,14 +139,17 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 80px;
+  height: calc(80px + env(safe-area-inset-bottom));
   background: #F9C3D4;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: env(safe-area-inset-bottom);
   z-index: 10;
 }
 
-footer .menu img {
-  width: 30px;
+.menu img {
+  width: 35px;
+  padding-bottom: 8px;
+  box-sizing: content-box;
 }
