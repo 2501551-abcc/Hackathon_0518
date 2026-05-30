@@ -1,25 +1,22 @@
 /* 全体 */
 html, body{
-  overflow: hidden;
+    overflow: hidden;
 }
-body {
-  margin: 0;
-  background: #FFF;
-  display: flex;
-  justify-content: center;
+body{
+    margin: 0;
+    background: #FFF;
+    display: flex;
+    justify-content: center;
 }
-
-/* ゲーム画面（スマホサイズ） */
-.container {
-  width: 390px; /* iPhoneサイズ */
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  background-image: url("images/部屋.jpg"); /* 背景 */
-  background-size: cover;
-  background-position: 60% center;
+.container{
+    width: 100vw; 
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-image: url("images/部屋.jpg"); /* 背景 */
+    background-size: cover;
+    background-position: 60% center;
 }
-
 .top_content{
     position: absolute;
     top: 20px;
@@ -30,7 +27,6 @@ body {
     align-items: center;
     z-index: 3;
 }
-
 .task_circle{
     width: 70px;
     height: 70px;
@@ -64,92 +60,79 @@ body {
     border-radius: 20px;
     font-weight: bold;
 }
-
 #favorability_content{
     font-size: 14px;
     color: #F9C3D4;
 }
-
 #favorability_level{
     font-size: 14px;
     color: #F9C3D4;
 }
-
 /* キャラ */
-#character {
-  position: absolute;
-  bottom: -20vh;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 110vh;
-  z-index: 2;
+#character{
+    position: absolute;
+    bottom: -20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 110vh;
+    z-index: 2;
 }
-
 /* メッセージボックス */
-#message_box {
-  position: absolute;
-  bottom: 170px; 
-  width: 80%;
-  height: 120px;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-left: auto;margin-right: auto;
-  padding: 18px;
-  background: #FFFFFF;
-  border: 3px solid #F9C3D4;
-  border-radius: 20px;
-  z-index: 3;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+#message_box{
+    position: absolute;
+    bottom: 170px; 
+    width: 80%;
+    height: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: auto;margin-right: auto;
+    padding: 18px;
+    background: #FFFFFF;
+    border: 3px solid #F9C3D4;
+    border-radius: 20px;
+    z-index: 3;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
-
 /* 名前 */
-#name {
-  position: absolute;
-  top: -40px;
-  left: 25px;
-  background: #F9C3D4;
-  color: #FFFFFF;
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-size: 16px;
-
+#name{
+    position: absolute;
+    top: -40px;
+    left: 25px;
+    background: #F9C3D4;
+    color: #FFFFFF;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 16px;
 }
-
 /* セリフ */
-#message {
-  font-size: 16px;
-  line-height: 1.5;
+#message{
+    font-size: 16px;
+    line-height: 1.5;
 }
-
-/* 次へボタン */
-#nextBtn {
-  position: absolute;
-  right: 16px;
-  bottom: 20px;
-  background: #f4a7b9;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  color: white;
-  cursor: pointer;
-}
-
 /* 下メニュー */
-.menu {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: calc(80px + env(safe-area-inset-bottom));
-  background: #F9C3D4;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding-bottom: env(safe-area-inset-bottom);
-  z-index: 10;
+.menu{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: calc(80px + env(safe-area-inset-bottom));
+    background: #F9C3D4;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 10;
 }
-
-.menu img {
-  width: 35px;
-  padding-bottom: 8px;
-  box-sizing: content-box;
+.menu a{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 上下左右に 15px 分の「透明なクリック領域」を広げる */
+    padding: 20px 30px;
+}
+.menu img{
+    width: 35px;
+    padding-bottom: 8px;
+    box-sizing: content-box;
+    height: auto; /* 縦横比を維持 */
+    display: block;
 }
