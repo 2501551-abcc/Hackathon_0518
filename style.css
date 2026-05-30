@@ -59,6 +59,7 @@ body {
     background: #FFFFFF;
     border: 2px solid #F9C3D4;
     border-radius: 20px;
+    font-weight: bold;
 }
 
 #favorability_content{
@@ -69,7 +70,6 @@ body {
 #favorability_level{
     font-size: 14px;
     color: #F9C3D4;
-    font-weight: bold;
 }
 
 /* キャラ */
