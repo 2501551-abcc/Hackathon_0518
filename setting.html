@@ -5,38 +5,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <title>おせっかいアプリ</title>
         <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="js/seting.js" defer></script>
     </head>
     <body>
         <div class ="container">
-            <!-- 必須設定項目 -->
-             <form>
+            <form id="input_form">
                 <div class="required_setting">
-                    <label for="appointment-time">朝ご飯：</label>
-                    <input type="time" id="breakfast" name="required_content">
+                    <label for="breakfast">朝ご飯：</label>
+                    <input type="time" id="breakfast" name="required_content" class="input">
                 </div>
 
                 <div class="required_setting">
-                    <label for="appointment-time">夜ご飯：</label>
-                    <input type="time" id="dinner" name="required_content">
+                    <label for="dinner">夜ご飯：</label>
+                    <input type="time" id="dinner" name="required_content" class="input">
                 </div>
 
                 <div class="required_setting">
-                    <label for="appointment-time">お風呂：</label>
-                    <input type="time" id="bath" name="required_content">
+                    <label for="bath">お風呂：</label>
+                    <input type="time" id="bath" name="required_content" class="input">
                 </div>
 
 
-                <!-- 任意の天気や忘れ物のトグルボタン-->
                 <div class="any_setting">
                     天気：
-                    <input id="weather" class="toggle_input" type='checkbox' />
-                    <label for="toggle" class="toggle_label" />
+                    <input id="weather" class="input" type='checkbox' />
+                    <label for="weather" class="toggle_label"></label>
                 </div>
                 <div class="any_setting">
                     忘れ物：
-                    <input id="forget" class="toggle_input" type='checkbox' />
-                    <label for="toggle" class="toggle_label" />
+                    <input id="forget" class="input" type='checkbox' />
+                    <label for="forget" class="toggle_label"></label>
                 </div>
+
+                <button type="submit" id="updateBtn" style="display: none;">更新する</button>
 
             </form>
             <div class="menu">
