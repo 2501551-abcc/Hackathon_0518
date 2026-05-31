@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <title>おせっかいアプリ</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <link href="task_confirm.css" rel="stylesheet" type="text/css">
+        <script src="js/task_confirm.js" defer></script>
+    </head>
+    <body>
+        <div class ="task_confirm_back">
+            <div id="back_image">
+            </div>
+            <div class="task_confirm_icon">
+                <img id="character-icon" src="images/chara-icon.jpg" alt="ギャルの女の子のキャラ画像">
+                <h2>女の子の名前</h2>
+            </div>
+
+            <div class="now_task_div">
+                <h3 id="now_task">タスクの内容</h3>
+            </div>
+
+            <div id="task_confirm_container">
+                <div class="task_button_div" id="ng_button_div">
+                    <div class="task_confirm_div" id="ng_div">
+                        <img src="images/white_ng.png" alt="バツ">
+                    </div>
+                    まだ
+                </div>
+                <div class="task_button_div" id="ok_button_div" onclick="task_complete()">
+                    <div class="task_confirm_div" id="ok_div">
+                        <img src="images/white_ok.png" alt="〇">
+                    </div>
+                    完了
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
