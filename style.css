@@ -14,6 +14,8 @@ body{
     height: 100vh;
     position: relative;
     overflow: hidden;
+}
+#home_container{
     background-image: url("images/部屋.jpg"); /* 背景 */
     background-size: cover;
     background-position: 60% center;
