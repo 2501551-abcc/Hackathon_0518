@@ -32,7 +32,6 @@ function Next_minute_timer() {
 
 
 // 位置情報を取得し、APIから天気を取得 ＆ 自宅判定を行う関数
-// (バグ修正版：エラーキャッシュも1時間保持して、リロード時のフリーズを防止)
 
 function Update_weather() {
     return new Promise((resolve) => {
@@ -58,6 +57,7 @@ function Update_weather() {
             let lat = position.coords.latitude;
             let lon = position.coords.longitude;
 
+            //自宅情報が設定されていない場合、東京が自動設定される
             let savedHome = JSON.parse(localStorage.getItem('user_home'));
             let HOME_LAT = savedHome ? savedHome.lat : 35.6895; 
             let HOME_LON = savedHome ? savedHome.lon : 139.6917;
@@ -70,16 +70,18 @@ function Update_weather() {
                 let data = await response.json();
                 let weatherCode = data.current_weather.weathercode;
                 
+                //天気が何かを判定
                 let weatherString = "晴れ";
                 if (weatherCode >= 51 && weatherCode <= 67) { weatherString = "雨"; }
                 else if (weatherCode >= 71 && weatherCode <= 86) { weatherString = "雪"; }
                 else if (weatherCode >= 1 && weatherCode <= 3) { weatherString = "曇り"; }
 
+                //今の情報を保存
                 let weatherInfo = {
-                    status: weatherString,
-                    isHome: isHome, 
-                    updatedAt: Date.now(),
-                    isError: false
+                    status: weatherString, //今の天気が何か
+                    isHome: isHome,        //今自宅にいるかどうか（自宅にいるとtrue）
+                    updatedAt: Date.now(), //最後にデータが保存、変更された時間
+                    isError: false         //位置情報エラーになっているかどうか(エラーじゃなかったらfalse)
                 };
                 localStorage.setItem('cached_weather', JSON.stringify(weatherInfo));
                 
@@ -130,6 +132,7 @@ function Set_default(statusString, isHome = true, isError = false) {
     localStorage.setItem('cached_weather', JSON.stringify(weatherInfo));
 }
 
+//エラーを表示する関数（削除予定※test用）
 function Display_error(error) {
     let messageBox = document.getElementById('message_box');
     if (!messageBox) return;
@@ -183,7 +186,7 @@ function Remove_error() {
         existingNotice.remove();
     }
 }
-
+//セリフを表示する関数
 function Check_display() {
     let taskTalkElement = document.getElementById('message');
     if (!taskTalkElement) return;
@@ -202,35 +205,59 @@ function Check_display() {
     // ==========================================
     // 1.ユーザーが設定したジャンル別セリフ
     // ==========================================
-    let savedTasks = JSON.parse(localStorage.getItem('user_tasks')) || {};
-    if (savedTasks[currentTimeString]) {
-        let userGenre = savedTasks[currentTimeString]; 
-        let genreTalks = [];
-        //ジャンル、セリフともに追加可能(htmlにも追加必須)
-        if (userGenre === "睡眠") {
-            genreTalks = [
-                "スマホばっかやってないよね？早く寝ろ！！", 
-                "早く寝ないと健康に悪いぞー。お布団入りな？",
-                "夜更かしは美容の敵！早くお布団に入って！"
-            ];
-        } else if (userGenre === "運動") {
-            genreTalks = [
-                "ちゃんと運動しないとだめだぞ〜太るぞ！！動け！！",
-                "最近体重計乗った？自分磨きしてけ〜？",
-                "ずっと座りっぱなしじゃない？ちょっとストレッチしなよ！"
-            ];
-        } else if (userGenre === "料理") {
-            genreTalks = [
-                "炊飯器放置してないよね？！お米カピカピになるよ！",
-                "冷蔵庫に何入ってる〜？賞味期限切らせてないよね？！",
-                "食べた後皿洗った？放置したらダメだからね！"
-            ];
-        }
-        if (genreTalks.length > 0) {
-            let randomIndex = Math.floor(Math.random() * genreTalks.length);
-            taskTalkElement.textContent = `【${userGenre}の時間】${genreTalks[randomIndex]}`;
-            return; 
-        }
+    let userGenre = null;
+    let genreTalks = [];
+
+    // 現在の時間と、各設定時間が一致するか個別に確認する
+    if(currentTimeString === localStorage.getItem('breakfast')) {
+        userGenre = "朝ごはん";
+        genreTalks = [
+            "おはよう！朝ごはん食べないとお昼まできついぞ～",
+            "おっは～！忙しいのはわかるけど、ちゃんと朝ご飯食べなよ～？",
+            "おはよん～朝ごはんしっかり食べて今日一日頑張ってこ～！"
+        ];
+    } else if (currentTimeString === localStorage.getItem('dinner')) {
+        userGenre = "夜ごはん";
+        genreTalks = [
+            "お疲れさま～疲れたっしょ～夜ごはんいっぱい食べてリセットしよ！", 
+            "おつおつ～めっちゃお腹すいた！！あんたも夜ごはんちゃんと食べるんだよ～",
+            "お疲れ様！夜ごはん食べてきた～？それとも今から？"
+        ];
+    } else if (currentTimeString === localStorage.getItem('bath')) {
+        userGenre = "お風呂";
+        genreTalks = [
+            "ねえ～もしかしてだけど、お風呂入ってないなんてことはないよね？", 
+            "もうお風呂入る時間だよ～早くお風呂入ってすっきりしよ！",
+            "風呂キャンではないよね…？お風呂入ってきてよ～？"
+        ];
+    } else if (currentTimeString === localStorage.getItem('time_sleep')) {
+        userGenre = "睡眠";
+        genreTalks = [
+            "スマホばっかやってないよね？早く寝ろ！！", 
+            "早く寝ないと健康に悪いぞー。お布団入りな？",
+            "夜更かしは美容の敵！早くお布団に入って！"
+        ];
+    } else if (currentTimeString === localStorage.getItem('time_exercise')) {
+        userGenre = "運動";
+        genreTalks = [
+            "ちゃんと運動しないとだめだぞ〜太るぞ！！動け！！",
+            "最近体重計乗った？自分磨きしてけ〜？",
+            "ずっと座りっぱなしじゃない？ちょっとストレッチしなよ！"
+        ];
+    } else if (currentTimeString === localStorage.getItem('time_cooking')) {
+        userGenre = "料理";
+        genreTalks = [
+            "炊飯器放置してないよね？！お米カピカピになるよ！",
+            "冷蔵庫に何入ってる〜？賞味期限切らせてないよね？！",
+            "食べた後皿洗った？放置したらダメだからね！"
+        ];
+    }
+
+    // もし時間が一致するジャンルがあれば、ランダムでセリフを表示して終了する
+    if (userGenre && genreTalks.length > 0) {
+        let randomIndex = Math.floor(Math.random() * genreTalks.length);
+        taskTalkElement.textContent = `【${userGenre}】${genreTalks[randomIndex]}`;
+        return; 
     }
     
     // ==========================================
@@ -254,7 +281,7 @@ function Check_display() {
     // 3.天気がON、かつ「朝7時台」のときだけ発動
     // ==========================================
     // 天気ボタンが'false' ではないとき（null または 'true' のとき）は true と判定する
-    let isWeatherEnabled = localStorage.getItem('toggle_weather') !== 'false';
+    let isWeatherEnabled = localStorage.getItem('weather') !== 'false';
 
     if (isWeatherEnabled && currentHour === 7 && cachedWeather) {
         let weatherTalks = [];
@@ -359,7 +386,7 @@ function Check_display() {
         { start: 12, end: 16, talks: ["お昼休憩終わっちゃよ！午後もお仕事がんばれー！！", "そろそろ眠くなってくる時間じゃない？ガムでも噛んで集中！", "お仕事終わらせて早く帰ってきてよね！！！", "おヤツの時間だけど、ちゃんと集中してお仕事してる？", "夕方だ！あとちょっとでお仕事終わりかな？"] },
         { start: 17, end: 20, talks: ["もう外暗いよ。寄り道しないで早く帰ってきてね！", "夜ごはん食べた？食べないとだめだよ！", "あたし夜ごはんハンバーグだった！あなたもちゃんと食べなよ～", "食べた後皿洗った？放置したらダメだからね！"] },
         { start: 21, end: 22, talks: ["早くお風呂入ってよ～？さすがに入んないとやばいから！！！", "まさか風呂キャン…じゃないよね？"] },
-        { start: 23, end: 4,  talks: ["スマホばっかやってないよね？早く寝ろ！！", "早く寝ないと健康に悪いぞー。もう夜中の0時だよ！", "まだ起きてるの？！早く寝なさい！", "夜更かしは美容の敵！早くお布団に入って！", "うにゃ…おやすみ…", "早く寝て！"] }
+        { start: 23, end: 4,  talks: ["スマホばっかやってないよね？早く寝ろ！！", "早く寝ないと健康に悪いぞー。もう夜中だよ！", "まだ起きてるの？！早く寝なさい！", "夜更かしは美容の敵！早くお布団に入って！", "うにゃ…おやすみ…", "早く寝て！"] }
     ];
 
     let weekendSchedule = [

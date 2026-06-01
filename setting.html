@@ -7,6 +7,7 @@
         <link href="style.css" rel="stylesheet" type="text/css">
         <link href="setting.css" rel="stylesheet" type="text/css">
         <script src="js/seting.js" defer></script>
+        <script src="js/config.js" defer></script>
     </head>
     <body>
         <div class ="container">
@@ -41,7 +42,11 @@
                     <label for="forget" class="toggle_label"></label>
                 </div>
                 <button type="submit" id="updateBtn" style="display: none;">更新する</button>
-
+                <div id="home_settings">
+                    <p id="current_home_text">自宅設定：未登録(自動的に東京が設定されます。)</p>
+                    <button id="save_home_btn">現在地を自宅として登録</button>
+                </div>
+                <div id="setting_error_area"></div>
             </form>
             <div class="menu">
                 <a href="home.html"><img src="images/icons8-ホーム-50.png"></a>

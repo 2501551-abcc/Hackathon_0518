@@ -2,27 +2,10 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
     let saveHomeBtn = document.getElementById('save_home_btn');
-    let toggleWeather = document.getElementById('toggle_weather');
-    
-    // 1. 各タイマーの変更時に自動保存（空欄時は自動削除）
-    setupTaskEvent('time_sleep', '睡眠');
-    setupTaskEvent('time_exercise', '運動');
-    setupTaskEvent('time_cooking', '料理');
+    let toggleWeather = document.getElementById('weather');
 
-    // 2. 天気トグルボタンの初期ロードとイベント連動
-    if (toggleWeather) {
-        // 保存されている設定を反映（未設定ならデフォルトtrue）
-        let isWeatherEnabled = localStorage.getItem('toggle_weather') !== 'false';
-        toggleWeather.checked = isWeatherEnabled;
-        
-        // 切り替え時にLocalStorageへ保存
-        toggleWeather.addEventListener('change', () => {
-            localStorage.setItem('toggle_weather', toggleWeather.checked);
-        });
-    }
-
-    // 3. 初期表示時のロード
-    Load_settings();
+    // 1. 初期表示時のロード（自宅設定のテキスト表示のみ）
+    Load_home_setting();
     await check_location_on_load();
 
     // 自宅保存ボタンのイベント
@@ -31,51 +14,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// input type="time" の値が変わったら保存・削除する関数
-function setupTaskEvent(elementId, genre) {
-    let element = document.getElementById(elementId);
-    if (!element) return;
-
-    element.addEventListener('change', () => {
-        let savedTasks = JSON.parse(localStorage.getItem('user_tasks')) || {};
-        
-        // 重複防止＆削除対応：既存の同じジャンルの古い時間を一度すべて消す
-        for (let time in savedTasks) {
-            if (savedTasks[time] === genre) {
-                delete savedTasks[time];
-            }
-        }
-
-        // 値が入力されている場合のみ、新しい時間をキーにして保存
-        if (element.value) {
-            savedTasks[element.value] = genre;
-        }
-        
-        localStorage.setItem('user_tasks', JSON.stringify(savedTasks));
-    });
-}
-
-//ローカルにあるデータをinputや現在の自宅設定に反映させる関数
-function Load_settings() {
+// 自宅設定の表示だけを行う関数
+function Load_home_setting() {
     let currentHomeText = document.getElementById('current_home_text');
-    let savedTasks = JSON.parse(localStorage.getItem('user_tasks')) || {};
-    
-    // 保存されているタスクを input type="time" に復元
-    for (let time in savedTasks) {
-        let genre = savedTasks[time];
-        if (genre === "睡眠") {
-            let el = document.getElementById('time_sleep');
-            if (el) el.value = time;
-        } else if (genre === "運動") {
-            let el = document.getElementById('time_exercise');
-            if (el) el.value = time;
-        } else if (genre === "料理") {
-            let el = document.getElementById('time_cooking');
-            if (el) el.value = time;
-        }
-    }
-
-    // 自宅設定の表示
     if (currentHomeText) {
         let savedHome = JSON.parse(localStorage.getItem('user_home'));
         if (savedHome && savedHome.lat && savedHome.lon) {
