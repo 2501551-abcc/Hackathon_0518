@@ -17,3 +17,7 @@ function task_complete(){
     }
 
 }
+
+function task_incomplete(){
+    //タスクがまだできてなかったら、いったん5分後に通知を流すことにする
+}

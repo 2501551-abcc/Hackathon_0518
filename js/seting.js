@@ -1,9 +1,9 @@
 window.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('input_form');
-    const updateBtn = document.getElementById('updateBtn');
-    const inputs = document.querySelectorAll('.input');
+    let form = document.getElementById('input_form');
+    let updateBtn = document.getElementById('updateBtn');
+    let inputs = document.querySelectorAll('.input');
 
-    const initialState = [];
+    let initialState = [];
     inputs.forEach((input, index) => {
         initialState[index] = input.type === 'checkbox' ? input.checked : input.value;
     });
@@ -46,3 +46,8 @@ button.addEventListener('click', () => {
     let forget = document.getElementById("forget").checked; 
     localStorage.setItem('forget', forget);
 });
+
+
+function set_now_task(){
+    
+}

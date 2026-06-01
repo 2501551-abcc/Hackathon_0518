@@ -39,19 +39,27 @@ function task_setting(){
         let b = "bath";
         task_set_func(a, b);
     }
-    if (localStorage.getItem("weather") !== null) 
-    {
-        let bath = localStorage.getItem("wea");
-        let a = "お風呂：" + bath; 
-
-        let b = "bath";             
-
+    let weather = localStorage.getItem("weather");
+    if(weather == "true"){
+        let a = "天気：オン";
+        let b = "weather";
         task_set_func(a, b);
+    }          
+    else{
+        let a = "天気：オフ";
+        let b = "weather";
+        notSet_func(a, b);
     }
-    else {
-        let a = "お風呂：未設定";
-        let b = "bath";
+    let forget = localStorage.getItem("forget");
+    if(weather == "true"){
+        let a = "忘れ物：オン";
+        let b = "forget";
         task_set_func(a, b);
+    }          
+    else{
+        let a = "忘れ物：オフ";
+        let b = "forget";
+        notSet_func(a, b);
     }
 }
 
@@ -74,5 +82,18 @@ function task_set_func(a, b){
         }
     }   
 }   
+
+function notSet_func(a,b){
+    let notSet = document.getElementsByClassName("notSet_task");
+
+    let newElement = document.createElement('p');   
+    newElement.textContent = a;
+    newElement.className = "task_content";
+    newElement.id = b;
+
+    if (notSet.length > 0){
+        notSet[0].appendChild(newElement);
+    }
+}
   
-window.onload = task_setting;
+window.onload = task_setting();
