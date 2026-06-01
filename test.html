@@ -15,7 +15,15 @@
             <p>未完了</p>
         </div>
         <form>
-            <input type="text" id="task_test" placeholder="朝ごはんor夜ご飯orお風呂">
+            <label>テストしたい項目を選んでください:</label>
+
+            <select name="test" id="test_value">
+                <option value="breakfast">朝ごはん</option>
+                <option value="dinner">夜ご飯</option>
+                <option value="bath">お風呂</option>
+                <option value="forget">忘れ物</option>
+                <option value="weather">天気</option>
+            </select>
             <button type="submit">送信</button>
         </form>
 
