@@ -15,7 +15,7 @@ function task_complete(){
     }else if(complete_task = "お風呂"){
         localStorage.setItem("bath_task", "true");
     }
-
+    window.location.href = "task_list.html"; 
 }
 
 function task_incomplete(){
