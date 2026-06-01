@@ -140,3 +140,76 @@ body{
     height: auto; /* 縦横比を維持 */
     display: block;
 }
+
+/*以下設定画面のデザイン*/
+.top_label{
+    background-color: #F9C3D4;
+    margin-bottom: 16px;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+#input_form{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 20px 120px;
+}
+.required_setting{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 2px solid #F9C3D4;
+}
+.required_setting label{
+    font-size: 14px;
+    color: #555;
+}
+.required_setting input[type="time"]{
+    border: none;
+    font-size: 14px;
+}
+.any_setting{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 2px solid #F9C3D4;
+    font-size: 14px;
+    color: #555;
+}
+.any_setting input{
+    display: none;
+}
+.toggle_label{
+    width: 46px;
+    height: 24px;
+    background: #ccc;
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+}
+.toggle_label::after{
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: 0.2s;
+}
+input:checked + .toggle_label{
+    background: #F9C3D4;
+}
+input:checked + .toggle_label::after{
+    left: 24px;
+}
