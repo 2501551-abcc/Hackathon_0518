@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 let button = document.querySelector('#updateBtn');
 button.addEventListener('click', () => {
-    localStorage.clear();
+    localStorage.clear("breakfast", "diiner", "bath", "weather", "forget");
     let breakfast = document.getElementById("breakfast").value;;
     localStorage.setItem('breakfast', breakfast);
 

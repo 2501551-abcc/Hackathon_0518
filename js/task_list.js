@@ -39,6 +39,20 @@ function task_setting(){
         let b = "bath";
         task_set_func(a, b);
     }
+    if (localStorage.getItem("weather") !== null) 
+    {
+        let bath = localStorage.getItem("wea");
+        let a = "お風呂：" + bath; 
+
+        let b = "bath";             
+
+        task_set_func(a, b);
+    }
+    else {
+        let a = "お風呂：未設定";
+        let b = "bath";
+        task_set_func(a, b);
+    }
 }
 
 function task_set_func(a, b){

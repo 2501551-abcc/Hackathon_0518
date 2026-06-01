@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <title>おせっかいアプリ</title>
-        <script src="js/task_confirm.js" defer></script>
     </head>
     <body>
         <h3>タスクの通知確認</h3>
@@ -24,8 +23,78 @@
                 <option value="forget">忘れ物</option>
                 <option value="weather">天気</option>
             </select>
-            <button type="submit">送信</button>
+            <button type="button" onclick="task_alerm()">送信</button>
         </form>
+        <script>
+            function task_alerm(){
+                // 1. ブラウザが通知機能に対応しているかチェック
+                if (!("Notification" in window)) {
+                    alert("このブラウザは通知に対応していません");
+                    return;
+                }
 
+                // 2. ユーザーの許可状態を確認、または新しく許可を求める
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        // 3. 許可されていれば、通知を表示する
+                        let task_content = document.getElementById("test_value").value;
+
+                        if(task_content == '朝ごはん' || task_content == "夜ご飯" || task_content == "お風呂"){
+                            const notification = new Notification("アプリからのメッセージ", {
+                                body: task_content + "の時間だよ！",
+                                icon: "https://via.placeholder.com/128" // 通知に表示するアイコンの画像URL
+                            });
+
+                            notification.onclick = function(event) {
+                                event.preventDefault();
+
+                                localStorage.clear("task_content");                            
+                                localStorage.setItem("task_content", task_content);
+                                
+                                window.location.href = "task_confirm.html"; 
+                                
+                                notification.close();
+                            };
+                        }else if(task_content == "天気"){
+                            /*ここ天気の処理(今の天気を通知する？などあれば）*/
+
+                            const notification = new Notification("アプリからのメッセージ", {
+                                body: task_content + "の時間だよ！",
+                                icon: "https://via.placeholder.com/128" // 通知に表示するアイコンの画像URL
+                            });
+
+                            notification.onclick = function(event) {
+                                event.preventDefault();
+
+                                localStorage.clear("weather_task");                            
+                                localStorage.setItem("weather_task", "true");
+                                
+                                window.location.href = "task_list.html"; 
+                                
+                                notification.close();
+                            };
+                        }else if(task_content == "忘れ物"){
+                            const notification = new Notification("アプリからのメッセージ", {
+                                body: task_content + "ない？気を付けてね！",
+                                icon: "https://via.placeholder.com/128" // 通知に表示するアイコンの画像URL
+                            });
+
+                            notification.onclick = function(event) {
+                                event.preventDefault();
+
+                                localStorage.clear("forget_task");                            
+                                localStorage.setItem("forget_task", "true");
+                                
+                                window.location.href = "task_list.html"; 
+                                
+                                notification.close();
+                            };
+                        }                
+                    } else if (permission === "denied") {
+                        alert("通知がブロックされています。ブラウザの設定から許可してください。");
+                    }
+                });
+            }
+        </script>
     </body>
 </html>
