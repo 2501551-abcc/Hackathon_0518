@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
+    set_now_task();
     let form = document.getElementById('input_form');
     let updateBtn = document.getElementById('updateBtn');
     let inputs = document.querySelectorAll('.input');
@@ -27,10 +28,9 @@ window.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('change', checkChanges);
 });
 
-
+//ボタンを押したらローカルストレージに内容を保存する関数
 let button = document.querySelector('#updateBtn');
 button.addEventListener('click', () => {
-    localStorage.clear("breakfast", "diiner", "bath", "weather", "forget");
     let breakfast = document.getElementById("breakfast").value;;
     localStorage.setItem('breakfast', breakfast);
 
@@ -48,6 +48,21 @@ button.addEventListener('click', () => {
 });
 
 
+//すでにセットされた設定を画面に反映させる最初の関数
 function set_now_task(){
-    
-}
+    let now_task_lst = ['breakfast', 'dinner', 'bath', 'weather', 'forget'];
+
+    now_task_lst.forEach((key) => {
+        let inputElement = document.getElementById(key);
+        let savedValue = localStorage.getItem(key);
+
+        if (inputElement && savedValue !== null) {
+            
+            if (inputElement.type === 'checkbox') {
+                inputElement.checked = (savedValue === 'true');
+            } else {
+                inputElement.value = savedValue;
+            } 
+        }
+    })
+};
