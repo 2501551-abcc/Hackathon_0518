@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <script src="js/task_list.js" defer></script>
         <title>おせっかいアプリ</title>
     </head>
     <body>
@@ -14,7 +15,7 @@
             <p>未完了</p>
         </div>
         <form>
-            <label>テストしたい項目を選んでください:</label>
+            <label>テストしたい項目を選んでください:</label><br>
 
             <select name="test" id="test_value">
                 <option value="breakfast">朝ごはん</option>
@@ -23,24 +24,21 @@
                 <option value="forget">忘れ物</option>
                 <option value="weather">天気</option>
             </select>
-            <button type="button" onclick="task_alerm()">送信</button>
+            <p><button type="button" onclick="task_alerm()">送信</button></p>
         </form>
         <script>
             function task_alerm(){
-                // 1. ブラウザが通知機能に対応しているかチェック
                 if (!("Notification" in window)) {
                     alert("このブラウザは通知に対応していません");
                     return;
                 }
 
-                // 2. ユーザーの許可状態を確認、または新しく許可を求める
                 Notification.requestPermission().then(permission => {
                     if (permission === "granted") {
-                        // 3. 許可されていれば、通知を表示する
                         let task_content = document.getElementById("test_value").value;
 
                         if(task_content == '朝ごはん' || task_content == "夜ご飯" || task_content == "お風呂"){
-                            const notification = new Notification("アプリからのメッセージ", {
+                            let notification = new Notification("アプリからのメッセージ", {
                                 body: task_content + "の時間だよ！",
                                 icon: "https://via.placeholder.com/128" // 通知に表示するアイコンの画像URL
                             });
@@ -58,7 +56,7 @@
                         }else if(task_content == "天気"){
                             /*ここ天気の処理(今の天気を通知する？などあれば）*/
 
-                            const notification = new Notification("アプリからのメッセージ", {
+                            let notification = new Notification("アプリからのメッセージ", {
                                 body: task_content + "の時間だよ！",
                                 icon: "https://via.placeholder.com/128" // 通知に表示するアイコンの画像URL
                             });
@@ -74,7 +72,7 @@
                                 notification.close();
                             };
                         }else if(task_content == "忘れ物"){
-                            const notification = new Notification("アプリからのメッセージ", {
+                            let notification = new Notification("アプリからのメッセージ", {
                                 body: task_content + "ない？気を付けてね！",
                                 icon: "https://via.placeholder.com/128" // 通知に表示するアイコンの画像URL
                             });

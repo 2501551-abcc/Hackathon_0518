@@ -1,3 +1,5 @@
+//タスクリストに進捗に応じて表示する関数
+
 function task_setting(){
     if (localStorage.getItem("breakfast") !== null) 
     {
@@ -63,6 +65,8 @@ function task_setting(){
     }
 }
 
+
+//完了・未完了に分けられるタスクをセットする関数
 function task_set_func(a, b){
     let complete = document.getElementsByClassName("complete_task");
     let incomplete = document.getElementsByClassName("incomplete_task");
@@ -83,6 +87,8 @@ function task_set_func(a, b){
     }   
 }   
 
+
+//未設定のタスクを振り分ける関数
 function notSet_func(a,b){
     let notSet = document.getElementsByClassName("notSet_task");
 
