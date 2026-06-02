@@ -19,5 +19,7 @@ function task_complete(){
 }
 
 function task_incomplete(){
-    //タスクがまだできてなかったら、いったん5分後に通知を流すことにする
+    //タスクがまだできてなかったら、いったん5分後に通知を流すことにしたい！いずれ
+    //とりあえずホームに移動させるだけ
+    window.location.href = "index.html";
 }
