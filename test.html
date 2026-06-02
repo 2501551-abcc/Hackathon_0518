@@ -37,7 +37,6 @@
                 if (permission === "granted") {
                     let task_content = document.getElementById("test_value").value;
 
-                    // 🌟 1. 通知に表示する日本語名と、タップ時の遷移先を決める
                     let dispName = "タスク";
                     let targetUrl = "task_list.html"; // デフォルトの遷移先
 
@@ -55,14 +54,18 @@
                         localStorage.setItem("forget_task", "true");
                     }
 
-                    // 🌟 2. サービスワーカー（裏ボス）に通知を依頼する
+                    //サービスワーカー
                     navigator.serviceWorker.ready.then((registration) => {
-                        // オプション設定の中に、遷移先URLを「data」として忍ばせておくのがプロの技！
+                        //↓で通知の文章を表示しています。
+                        //天気の具合で文章を変えたい場合は、それようのコードをここら辺に貼ってもらって判定する感じになるかも
+
+
+
                         registration.showNotification("アプリからのメッセージ", {
                             body: task_content === "forget" ? "忘れ物ない？気を付けてね！" : dispName + "の時間だよ！",
                             icon: "images/icon192.png",
                             data: {
-                                url: targetUrl // 👈 ここに遷移先URLを仕込む
+                                url: targetUrl 
                             }
                         });
                     });
