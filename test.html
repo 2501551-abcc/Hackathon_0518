@@ -27,72 +27,52 @@
             <p><button type="button" onclick="task_alerm()">送信</button></p>
         </form>
         <script>
-            function task_alerm(){
-                if (!("Notification" in window)) {
-                    alert("このブラウザは通知に対応していません");
-                    return;
-                }
-
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        let task_content = document.getElementById("test_value").value;
-
-                        if(task_content == '朝ごはん' || task_content == "夜ご飯" || task_content == "お風呂"){
-                            let notification = new Notification("アプリからのメッセージ", {
-                                body: task_content + "の時間だよ！",
-                                icon: "images/icon192.png" // 通知に表示するアイコンの画像URL
-                            });
-
-                            notification.onclick = function(event) {
-                                event.preventDefault();
-
-                                localStorage.clear("task_content");                            
-                                localStorage.setItem("task_content", task_content);
-                                
-                                window.location.href = "task_confirm.html"; 
-                                
-                                notification.close();
-                            };
-                        }else if(task_content == "天気"){
-                            /*ここ天気の処理(今の天気を通知する？などあれば）*/
-
-                            let notification = new Notification("アプリからのメッセージ", {
-                                body: task_content + "の時間だよ！",
-                                icon: "images/icon192.png" // 通知に表示するアイコンの画像URL
-                            });
-
-                            notification.onclick = function(event) {
-                                event.preventDefault();
-
-                                localStorage.clear("weather_task");                            
-                                localStorage.setItem("weather_task", "true");
-                                
-                                window.location.href = "task_list.html"; 
-                                
-                                notification.close();
-                            };
-                        }else if(task_content == "忘れ物"){
-                            let notification = new Notification("アプリからのメッセージ", {
-                                body: task_content + "ない？気を付けてね！",
-                                icon: "images/icon192.png" // 通知に表示するアイコンの画像URL
-                            });
-
-                            notification.onclick = function(event) {
-                                event.preventDefault();
-
-                                localStorage.clear("forget_task");                            
-                                localStorage.setItem("forget_task", "true");
-                                
-                                window.location.href = "task_list.html"; 
-                                
-                                notification.close();
-                            };
-                        }                
-                    } else if (permission === "denied") {
-                        alert("通知がブロックされています。ブラウザの設定から許可してください。");
-                    }
-                });
+            function task_alerm() {
+            if (!("Notification" in window)) {
+                alert("このブラウザは通知に対応していません");
+                return;
             }
+
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    let task_content = document.getElementById("test_value").value;
+
+                    // 🌟 1. 通知に表示する日本語名と、タップ時の遷移先を決める
+                    let dispName = "タスク";
+                    let targetUrl = "task_list.html"; // デフォルトの遷移先
+
+                    if (task_content === 'breakfast' || task_content === "dinner" || task_content === "bath") {
+                        if(task_content === 'breakfast') dispName = "朝ごはん";
+                        if(task_content === 'dinner') dispName = "夜ご飯";
+                        if(task_content === 'bath') dispName = "お風呂";
+                        targetUrl = "task_confirm.html"; // 朝昼晩は確認画面へ
+                        localStorage.setItem("task_content", dispName);
+                    } else if (task_content === "weather") {
+                        dispName = "天気";
+                        localStorage.setItem("weather_task", "true");
+                    } else if (task_content === "forget") {
+                        dispName = "忘れ物";
+                        localStorage.setItem("forget_task", "true");
+                    }
+
+                    // 🌟 2. サービスワーカー（裏ボス）に通知を依頼する
+                    navigator.serviceWorker.ready.then((registration) => {
+                        // オプション設定の中に、遷移先URLを「data」として忍ばせておくのがプロの技！
+                        registration.showNotification("アプリからのメッセージ", {
+                            body: task_content === "forget" ? "忘れ物ない？気を付けてね！" : dispName + "の時間だよ！",
+                            icon: "images/icon192.png",
+                            data: {
+                                url: targetUrl // 👈 ここに遷移先URLを仕込む
+                            }
+                        });
+                    });
+
+                } else if (permission === "denied") {
+                    alert("通知がブロックされています。");
+                }
+            });
+        }
+                    
         </script>
     </body>
 </html>
