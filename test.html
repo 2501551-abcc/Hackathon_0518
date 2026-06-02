@@ -59,10 +59,60 @@
                         //↓で通知の文章を表示しています。
                         //天気の具合で文章を変えたい場合は、それようのコードをここら辺に貼ってもらって判定する感じになるかも
 
+                        //天気以外の通知文章を先に作っておく
+                        let notificationBody = task_content === "forget" ? "忘れ物ない？気を付けてね！" : dispName + "の時間だよ！";
 
+
+                        if (task_content === "weather") {
+                            let cachedWeather = JSON.parse(localStorage.getItem('cached_weather'));
+                            let isWeatherEnabled = localStorage.getItem('weather') !== 'false';
+
+                            // テスト画面用に必要な日時データを作成
+                            let now = new Date();
+                            let currentHour = now.getHours();
+
+                            if (isWeatherEnabled && cachedWeather) {
+                                let weatherTalks = [];
+
+                                if (cachedWeather.status === "雨") {
+                                    weatherTalks = [
+                                        "おはよ！今日外は雨降るっぽいから傘絶対に持ってきなよー！☔",
+                                        "最悪〜今日雨じゃん！お気に入りの靴濡らさないように気をつけてね？",
+                                        "外、雨だよー。テンション下がるけど、可愛い傘持ってがんばろ！"
+                                    ];
+                                } else if (cachedWeather.status === "晴れ") {
+                                    weatherTalks = [
+                                        "おはよー！外めっちゃいい天気だよ！☀️ 今日もサクッと頑張ろ！",
+                                        "めっちゃ晴れてるじゃん！最高〜！紫外線対策ちゃんとした？",
+                                        "おはよ！今日天気いいから、なんか良いことありそうだね〜！"
+                                    ];
+                                } else if (cachedWeather.status === "曇り") {
+                                    weatherTalks = [
+                                        "おはよ. 今日の天気は曇り空っぽい感じ〜☁️ 傘一応あると安心かも！",
+                                        "なんかパッとしない天気だね〜。どんよりだけど元気出してこ！",
+                                        "曇りだけど、過ごしやすい気温かも？今日もマイペースにいこー！"
+                                    ];
+                                } else {
+                                // 天気データが無い場合の予備メッセージ
+                                notificationBody = "おはよ！今日の天気はどうかな？登録した自宅の天気を確認してみてね！";
+                                }
+                              
+                                if (weatherTalks.length > 0) {
+                                    let weatherSeed = now.getFullYear() * 1000000 
+                                                    + (now.getMonth() + 1) * 10000 
+                                                    + now.getDate() * 100 
+                                                    + currentHour;
+                                    
+                                    let weatherIndex = weatherSeed % weatherTalks.length; 
+                                    
+                                    // 決定したセリフを通知用テキストに代入
+                                    notificationBody = weatherTalks[weatherIndex];
+                                }
+                            }
+                        }
 
                         registration.showNotification("アプリからのメッセージ", {
-                            body: task_content === "forget" ? "忘れ物ない？気を付けてね！" : dispName + "の時間だよ！",
+                            body: notificationBody,
                             icon: "images/icon192.png",
                             data: {
                                 url: targetUrl 
