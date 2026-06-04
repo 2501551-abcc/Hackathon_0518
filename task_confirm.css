@@ -1,5 +1,22 @@
+html,body{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 .task_confirm_back{
     position: relative; 
+    width: 100%;
+    height: 100%;
 }
 
 /*背景画像の設定項目です。
@@ -21,6 +38,7 @@
     background-image: url('images/部屋.jpg'); 
     background-size: cover;      
     background-position: center;
+    background-repeat: no-repeat;
     
     /* 🌟 ここで青黒い色を重ねてブレンドします */
     background-blend-mode: overlay; 
@@ -57,7 +75,7 @@
     right: 0;                 
     width: 100vw;             
     bottom: 0;   
-    top: 48%;
+    top: 50%;
 }
 
 .now_task_div h3{

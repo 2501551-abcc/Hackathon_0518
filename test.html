@@ -19,7 +19,7 @@
 
             <select name="test" id="test_value">
                 <option value="breakfast">朝ごはん</option>
-                <option value="dinner">夜ご飯</option>
+                <option value="dinner">夜ごはん</option>
                 <option value="bath">お風呂</option>
                 <option value="forget">忘れ物</option>
                 <option value="weather">天気</option>
@@ -38,13 +38,13 @@
                     let task_content = document.getElementById("test_value").value;
 
                     let dispName = "タスク";
-                    let targetUrl = "task_list.html"; // デフォルトの遷移先
+                    let targetUrl = "task_list.html"; 
 
                     if (task_content === 'breakfast' || task_content === "dinner" || task_content === "bath") {
                         if(task_content === 'breakfast') dispName = "朝ごはん";
-                        if(task_content === 'dinner') dispName = "夜ご飯";
+                        if(task_content === 'dinner') dispName = "夜ごはん";
                         if(task_content === 'bath') dispName = "お風呂";
-                        targetUrl = "task_confirm.html"; // 朝昼晩は確認画面へ
+                        targetUrl = "task_confirm.html"; 
                         localStorage.setItem("task_content", dispName);
                     } else if (task_content === "weather") {
                         dispName = "天気";
