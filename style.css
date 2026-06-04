@@ -241,3 +241,9 @@ input:checked + .toggle_label::after{
     flex-direction: column;
     gap: 10px;
 }
+.complete_task p:first-child,.incomplete_task p:first-child,.notSet_task p:first-child{
+    font-weight: bold;
+    color: #F9C3D4;
+    margin: 0;
+    font-size: 14px;
+}
