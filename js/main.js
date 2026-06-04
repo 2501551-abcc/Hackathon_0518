@@ -44,10 +44,7 @@ function Update_weather() {
         // エラーデータであっても、1時間以内ならGPSを再取得せず、現在のキャッシュをそのまま使って即resolveする
         let cachedWeather = JSON.parse(localStorage.getItem('cached_weather'));
         if (cachedWeather && (Date.now() - cachedWeather.updatedAt < 3600000)) {
-            if (cachedWeather.isError) {
-                // キャッシュがエラーデータだった場合は、エラー表示だけ残して次に進む
-                Display_error({ code: 1, PERMISSION_DENIED: 1 });
-            } else {
+            if (!cachedWeather.isError) {
                 Remove_error();  
             }
             return resolve();
@@ -97,11 +94,11 @@ function Update_weather() {
             console.warn(`位置情報エラー (コード: ${error.code})。一時的に曇り・自宅として処理します。`);
             Set_default("曇り", true, true); 
             
-            try {
-                Display_error(error); 
-            } catch(e) {
-                console.error("エラー表示処理でクラッシュしましたが、続行します:", e);
-            }
+            // try {
+            //     Display_error(error); 
+            //} catch(e) {
+            //   console.error("エラー表示処理でクラッシュしましたが、続行します:", e);
+            //}
             resolve();
         }, {
             enableHighAccuracy: true, 
