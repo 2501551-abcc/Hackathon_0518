@@ -108,6 +108,8 @@
                                     // 決定したセリフを通知用テキストに代入
                                     notificationBody = weatherTalks[weatherIndex];
                                 }
+                            }else if(!isWeatherEnabled){
+                                 notificationBody = "天気設定をオンにしてください";
                             }
                         }
 
