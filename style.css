@@ -223,6 +223,34 @@ input:checked + .toggle_label{
 input:checked + .toggle_label::after{
     left: 24px;
 }
+#home_settings{
+    background: #FFFFFF;
+    border: 2px solid #F9C3D4;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+#current_home_text{
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+#save_home_btn{
+    background: #F9C3D4;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 999px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#save_home_btn:active{
+    transform: scale(0.97);
+}
 
 /*以下タスクリスト画面のデザイン*/
 #task_list_area{
