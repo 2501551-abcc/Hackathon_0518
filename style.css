@@ -164,7 +164,7 @@ body{
     overflow-y: auto; 
     flex-direction: column;
     gap: 16px;
-    padding: 0 20px 120px;
+    padding: 0 20px calc(80px + env(safe-area-inset-bottom) + 30px);
 }
 .required_setting{
     display: flex;
@@ -230,7 +230,7 @@ input:checked + .toggle_label::after{
     overflow-y: auto; 
     flex-direction: column;
     gap: 16px;
-    padding: 0 20px 120px;
+    padding: 0 20px calc(80px + env(safe-area-inset-bottom) + 30px);
 }
 .complete_task,.incomplete_task,.notSet_task{
     background: #FFFFFF;
@@ -246,4 +246,24 @@ input:checked + .toggle_label::after{
     color: #F9C3D4;
     margin: 0;
     font-size: 14px;
+}
+.task_content{
+    background: #FFECEC;
+    border-radius: 10px;
+    padding: 15px 10px;
+    font-size: 14px;
+}
+.complete_task .task_content{
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+.notSet_task .task_content {
+    background: #FFECEC;
+    color: #999;
+}
+.task_content::before{
+    content: "□ ";
+}
+.complete_task .task_content::before{
+    content: "✓ ";
 }
