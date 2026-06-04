@@ -222,3 +222,22 @@ input:checked + .toggle_label{
 input:checked + .toggle_label::after{
     left: 24px;
 }
+
+/*以下タスクリスト画面のデザイン*/
+#task_list_area{
+    flex: 1;
+    display: flex;
+    overflow-y: auto; 
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 20px 120px;
+}
+.complete_task,.incomplete_task,.notSet_task{
+    background: #FFFFFF;
+    border: 2px solid #F9C3D4;
+    border-radius: 16px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
