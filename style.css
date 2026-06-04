@@ -164,7 +164,7 @@ body{
     overflow-y: auto; 
     flex-direction: column;
     gap: 16px;
-    padding: 0 20px calc(80px + env(safe-area-inset-bottom) + 30px);
+    padding: 0 20px calc(80px + env(safe-area-inset-bottom) + 50px);
 }
 .required_setting{
     display: flex;
@@ -230,7 +230,7 @@ input:checked + .toggle_label::after{
     overflow-y: auto; 
     flex-direction: column;
     gap: 16px;
-    padding: 0 20px calc(80px + env(safe-area-inset-bottom) + 30px);
+    padding: 0 20px calc(80px + env(safe-area-inset-bottom) + 50px);
 }
 .complete_task,.incomplete_task,.notSet_task{
     background: #FFFFFF;
