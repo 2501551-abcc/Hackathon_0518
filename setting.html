@@ -5,49 +5,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <title>おせっかいアプリ</title>
         <link href="style.css" rel="stylesheet" type="text/css">
-        <link href="setting.css" rel="stylesheet" type="text/css">
         <script src="js/seting.js" defer></script>
         <script src="js/config.js" defer></script>
     </head>
     <body>
         <div class ="container">
-            <div class="top_label">
-                <span>設定</span>
+            <div class="scroll">
+                <div class="top_label">
+                    <span>設定</span>
+                </div>
+                <form id="input_form">
+                    <div class="required_setting">
+                        <label for="breakfast">朝ごはん：</label>
+                        <input type="time" id="breakfast" name="required_content" class="input" required>
+                    </div>
+                    <div class="required_setting">
+                        <label for="dinner">夜ごはん：</label>
+                        <input type="time" id="dinner" name="required_content" class="input" required>
+                    </div>
+                    <div class="required_setting">
+                        <label for="bath">お風呂：</label>
+                        <input type="time" id="bath" name="required_content" class="input" required>
+                    </div>
+                    <div class="any_setting">
+                        天気：
+                        <input id="weather" class="input" type='checkbox' />
+                        <label for="weather" class="toggle_label"></label>
+                    </div>
+                    <div class="any_setting">
+                        忘れ物：
+                        <input id="forget" class="input" type='checkbox' />
+                        <label for="forget" class="toggle_label"></label>
+                    </div>
+                    <button type="submit" id="updateBtn" style="display: none;">更新する</button>
+                    <div id="home_settings">
+                        <p id="current_home_text">自宅設定：未登録(自動的に東京が設定されます。)</p>
+                        <button id="save_home_btn">現在地を自宅として登録</button>
+                    </div>
+                    <div id="setting_error_area"></div>
+                </form>
             </div>
-            <form id="input_form">
-                <div class="required_setting">
-                    <label for="breakfast">朝ごはん：</label>
-                    <input type="time" id="breakfast" name="required_content" class="input" required>
-                </div>
-
-                <div class="required_setting">
-                    <label for="dinner">夜ごはん：</label>
-                    <input type="time" id="dinner" name="required_content" class="input" required>
-                </div>
-
-                <div class="required_setting">
-                    <label for="bath">お風呂：</label>
-                    <input type="time" id="bath" name="required_content" class="input" required>
-                </div>
-
-
-                <div class="any_setting">
-                    天気：
-                    <input id="weather" class="input" type='checkbox' />
-                    <label for="weather" class="toggle_label"></label>
-                </div>
-                <div class="any_setting">
-                    忘れ物：
-                    <input id="forget" class="input" type='checkbox' />
-                    <label for="forget" class="toggle_label"></label>
-                </div>
-                <button type="submit" id="updateBtn" style="display: none;">更新する</button>
-                <div id="home_settings">
-                    <p id="current_home_text">自宅設定：未登録(自動的に東京が設定されます。)</p>
-                    <button id="save_home_btn">現在地を自宅として登録</button>
-                </div>
-                <div id="setting_error_area"></div>
-            </form>
             <div class="menu">
                 <a href="index.html"><img src="images/icons8-ホーム-50.png"></a>
                 <a href="task_list.html"><img src="images/icons8-タスク-50.png"></a>
