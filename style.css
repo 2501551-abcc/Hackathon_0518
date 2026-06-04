@@ -251,6 +251,20 @@ input:checked + .toggle_label::after{
 #save_home_btn:active{
     transform: scale(0.97);
 }
+#updateBtn{
+    margin-top: 10px;
+    background: #FF007F;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(249, 195, 212, 0.4);
+    cursor: pointer;
+    transition: 0.2s;
+}
 
 /*以下タスクリスト画面のデザイン*/
 #task_list_area{
