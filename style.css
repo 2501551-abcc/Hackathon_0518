@@ -310,3 +310,12 @@ input:checked + .toggle_label::after{
 .complete_task .task_content::before{
     content: "✓ ";
 }
+
+#save_home_btn{
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid #F9C3D4;
+    background-color: #F9C3D4;
+    color: #FFFFFF;
+    font-weight: bold;
+}
